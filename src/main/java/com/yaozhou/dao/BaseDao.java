@@ -22,5 +22,9 @@ public class BaseDao {
         //通过类加载器加载响应的资源
         InputStream resource = BaseDao.class.getClassLoader().getResourceAsStream("db.properties");
 
+
     }
+    //获取数据库的链接
+
+    //编写查询公共类
 }

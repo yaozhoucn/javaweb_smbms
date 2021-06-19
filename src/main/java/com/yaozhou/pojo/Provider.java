@@ -3,123 +3,91 @@ package com.yaozhou.pojo;
 import java.util.Date;
 
 public class Provider {
-    private Long id;
-
-    private String procode;
-
-    private String proname;
-
-    private String prodesc;
-
-    private String procontact;
-
-    private String prophone;
-
-    private String proaddress;
-
-    private String profax;
-
-    private Long createdby;
-
-    private Date creationdate;
-
-    private Date modifydate;
-
-    private Long modifyby;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getProcode() {
-        return procode;
-    }
-
-    public void setProcode(String procode) {
-        this.procode = procode == null ? null : procode.trim();
-    }
-
-    public String getProname() {
-        return proname;
-    }
-
-    public void setProname(String proname) {
-        this.proname = proname == null ? null : proname.trim();
-    }
-
-    public String getProdesc() {
-        return prodesc;
-    }
-
-    public void setProdesc(String prodesc) {
-        this.prodesc = prodesc == null ? null : prodesc.trim();
-    }
-
-    public String getProcontact() {
-        return procontact;
-    }
-
-    public void setProcontact(String procontact) {
-        this.procontact = procontact == null ? null : procontact.trim();
-    }
-
-    public String getProphone() {
-        return prophone;
-    }
-
-    public void setProphone(String prophone) {
-        this.prophone = prophone == null ? null : prophone.trim();
-    }
-
-    public String getProaddress() {
-        return proaddress;
-    }
-
-    public void setProaddress(String proaddress) {
-        this.proaddress = proaddress == null ? null : proaddress.trim();
-    }
-
-    public String getProfax() {
-        return profax;
-    }
-
-    public void setProfax(String profax) {
-        this.profax = profax == null ? null : profax.trim();
-    }
-
-    public Long getCreatedby() {
-        return createdby;
-    }
-
-    public void setCreatedby(Long createdby) {
-        this.createdby = createdby;
-    }
-
-    public Date getCreationdate() {
-        return creationdate;
-    }
-
-    public void setCreationdate(Date creationdate) {
-        this.creationdate = creationdate;
-    }
-
-    public Date getModifydate() {
-        return modifydate;
-    }
-
-    public void setModifydate(Date modifydate) {
-        this.modifydate = modifydate;
-    }
-
-    public Long getModifyby() {
-        return modifyby;
-    }
-
-    public void setModifyby(Long modifyby) {
-        this.modifyby = modifyby;
-    }
+	
+	private Integer id;   //id
+	private String proCode; //供应商编码
+	private String proName; //供应商名称
+	private String proDesc; //供应商描述
+	private String proContact; //供应商联系人
+	private String proPhone; //供应商电话
+	private String proAddress; //供应商地址
+	private String proFax; //供应商传真
+	private Integer createdBy; //创建者
+	private Date creationDate; //创建时间
+	private Integer modifyBy; //更新者
+	private Date modifyDate;//更新时间
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getProCode() {
+		return proCode;
+	}
+	public void setProCode(String proCode) {
+		this.proCode = proCode;
+	}
+	public String getProName() {
+		return proName;
+	}
+	public void setProName(String proName) {
+		this.proName = proName;
+	}
+	public String getProDesc() {
+		return proDesc;
+	}
+	public void setProDesc(String proDesc) {
+		this.proDesc = proDesc;
+	}
+	public String getProContact() {
+		return proContact;
+	}
+	public void setProContact(String proContact) {
+		this.proContact = proContact;
+	}
+	public String getProPhone() {
+		return proPhone;
+	}
+	public void setProPhone(String proPhone) {
+		this.proPhone = proPhone;
+	}
+	public String getProAddress() {
+		return proAddress;
+	}
+	public void setProAddress(String proAddress) {
+		this.proAddress = proAddress;
+	}
+	public String getProFax() {
+		return proFax;
+	}
+	public void setProFax(String proFax) {
+		this.proFax = proFax;
+	}
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+	public Integer getModifyBy() {
+		return modifyBy;
+	}
+	public void setModifyBy(Integer modifyBy) {
+		this.modifyBy = modifyBy;
+	}
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+	
+	
 }

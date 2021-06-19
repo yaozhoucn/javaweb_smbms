@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="common/head.jsp"%>
+<%@include file="/jsp/common/head.jsp"%>
 
 <div class="right">
      <div class="location">
@@ -8,7 +8,9 @@
          <span>订单管理页面 >> 订单添加页面</span>
      </div>
      <div class="providerAdd">
-         <form id="billForm" name="billForm" method="post" action="">
+         <form id="billForm" name="billForm" method="post" action="${pageContext.request.contextPath }/jsp/bill.do">
+             <!--div的class 为error是验证错误，ok是验证成功-->
+             <input type="hidden" name="method" value="add">
              <div class="">
                  <label for="billCode">订单编码：</label>
                  <input type="text" name="billCode" class="text" id="billCode" value=""> 
@@ -54,4 +56,5 @@
      </div>
  </div>
 </section>
-<%@include file="common/foot.jsp" %>
+<%@include file="/jsp/common/foot.jsp" %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/billadd.js"></script>

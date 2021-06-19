@@ -3,73 +3,56 @@ package com.yaozhou.pojo;
 import java.util.Date;
 
 public class Role {
-    private Long id;
-
-    private String rolecode;
-
-    private String rolename;
-
-    private Long createdby;
-
-    private Date creationdate;
-
-    private Long modifyby;
-
-    private Date modifydate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRolecode() {
-        return rolecode;
-    }
-
-    public void setRolecode(String rolecode) {
-        this.rolecode = rolecode == null ? null : rolecode.trim();
-    }
-
-    public String getRolename() {
-        return rolename;
-    }
-
-    public void setRolename(String rolename) {
-        this.rolename = rolename == null ? null : rolename.trim();
-    }
-
-    public Long getCreatedby() {
-        return createdby;
-    }
-
-    public void setCreatedby(Long createdby) {
-        this.createdby = createdby;
-    }
-
-    public Date getCreationdate() {
-        return creationdate;
-    }
-
-    public void setCreationdate(Date creationdate) {
-        this.creationdate = creationdate;
-    }
-
-    public Long getModifyby() {
-        return modifyby;
-    }
-
-    public void setModifyby(Long modifyby) {
-        this.modifyby = modifyby;
-    }
-
-    public Date getModifydate() {
-        return modifydate;
-    }
-
-    public void setModifydate(Date modifydate) {
-        this.modifydate = modifydate;
-    }
+	
+	private Integer id;   //id
+	private String roleCode; //角色编码
+	private String roleName; //角色名称
+	private Integer createdBy; //创建者
+	private Date creationDate; //创建时间
+	private Integer modifyBy; //更新者
+	private Date modifyDate;//更新时间
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getRoleCode() {
+		return roleCode;
+	}
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
+	public String getRoleName() {
+		return roleName;
+	}
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+	public Integer getModifyBy() {
+		return modifyBy;
+	}
+	public void setModifyBy(Integer modifyBy) {
+		this.modifyBy = modifyBy;
+	}
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+	
 }

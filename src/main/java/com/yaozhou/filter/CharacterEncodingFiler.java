@@ -19,7 +19,6 @@ public class CharacterEncodingFiler implements Filter {
         response.setCharacterEncoding("utf-8");
         chain.doFilter(request,response);
     }
-
     public void destroy() {
 
     }

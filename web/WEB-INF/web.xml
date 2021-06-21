@@ -3,7 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    
+    <!--注册过滤器-->
+    <!--注册页面编码过滤器-->
+    <filter>
+        <filter-name>CharacterEncodingFiler</filter-name>
+        <filter-class>com.yaozhou.filter.CharacterEncodingFiler</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFiler</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <!--设置打开欢迎页-->
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>

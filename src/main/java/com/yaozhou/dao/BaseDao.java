@@ -36,7 +36,7 @@ public class BaseDao {
 
     }
     //获取数据库的链接
-    public static Connection getConnection(String driver,String url,String username,String password){
+    public static Connection getConnection(){
     //加载驱动
         Connection connection = null;
         try {

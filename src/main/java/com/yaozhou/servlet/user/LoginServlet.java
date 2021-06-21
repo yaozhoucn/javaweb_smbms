@@ -23,17 +23,20 @@ public class LoginServlet extends HttpServlet {
         if (userCode != null || userPassword != null){
             UserService userService = new UserServiceImpl();
             User user = userService.login(userCode, userPassword);
-            if(user.getUserPassword().equals(userPassword)){
-                req.getSession().setAttribute(Constants.USER_SEESI0N,user);
-                resp.sendRedirect("/jsp/frame.jsp");
-            }else {
+            if(user !=null){
+                if (user.getUserPassword().equals(userPassword)){
+                    req.getSession().setAttribute(Constants.USER_SEESI0N,user);
+                    resp.sendRedirect("/jsp/frame.jsp");
+                }else {
+                    req.setAttribute("error","用户名或密码有误，请重新登陆！");
+                    req.getRequestDispatcher("/login.jsp").forward(req,resp);
+                }
+            }else{
                 req.setAttribute("error","用户名或密码有误，请重新登陆！");
                 req.getRequestDispatcher("/login.jsp").forward(req,resp);
             }
-        }else {
-            req.setAttribute("error","用户名或密码不能为空");
-            req.getRequestDispatcher("/login.jsp").forward(req,resp);
         }
+
     }
 
     @Override

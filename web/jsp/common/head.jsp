@@ -13,7 +13,7 @@
 <body>
 <!--头部-->
     <header class="publicHeader">
-        <h1>超市订单管理系统</h1>
+        <h1>尧舟超市订单管理系统</h1>
         <div class="publicHeaderR">
             <p><span>下午好！</span><span style="color: #fff21b"> ${userSession.userName }</span> , 欢迎你！</p>
             <a href="${pageContext.request.contextPath }/jsp/logout.do">退出</a>

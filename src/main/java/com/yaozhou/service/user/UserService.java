@@ -15,4 +15,5 @@ public interface UserService {
      * @return
      */
     public User login(String userCode,String userPassword);
+    public int pwdModify(User user);
 }

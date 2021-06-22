@@ -10,5 +10,6 @@ import java.sql.Connection;
  */
 public interface UserDao {
     public User getLoginUser(Connection connection,String userCode);
+    public int pwdModify(Connection connection,User user);
 
 }

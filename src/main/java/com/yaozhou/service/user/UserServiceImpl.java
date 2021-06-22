@@ -34,4 +34,12 @@ public class UserServiceImpl implements UserService {
         return user;
 
     }
+
+    public int pwdModify(User user) {
+        Connection connection =null;
+        connection = BaseDao.getConnection();
+
+
+        return 0;
+    }
 }

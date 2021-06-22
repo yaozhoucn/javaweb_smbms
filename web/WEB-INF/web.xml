@@ -12,6 +12,15 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login.do</url-pattern>
     </servlet-mapping>
+    <!--注销/退出-->
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.yaozhou.servlet.user.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/jsp/logout.do</url-pattern>
+    </servlet-mapping>
     <!--注册过滤器-->
     <!--注册页面编码过滤器-->
     <filter>
@@ -21,6 +30,15 @@
     <filter-mapping>
         <filter-name>CharacterEncodingFiler</filter-name>
         <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <!--系统是否登陆权限过滤器-->
+    <filter>
+        <filter-name>SysFilter</filter-name>
+        <filter-class>com.yaozhou.filter.SysFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SysFilter</filter-name>
+        <url-pattern>/jsp/*</url-pattern>
     </filter-mapping>
     <!--设置打开欢迎页-->
     <welcome-file-list>

@@ -47,4 +47,21 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    public int pwdModify(Connection connection, User user) {
+        int i = 0;
+        PreparedStatement presm = null;
+        String userCode = user.getUserCode();
+        String userPassword = user.getUserPassword();
+        Object[] params = {userCode,userPassword};
+
+                String sql = "update smbms.smbms_user set userPassword = ? where userName = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            i = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+
 }

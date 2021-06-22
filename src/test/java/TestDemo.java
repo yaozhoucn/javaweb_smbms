@@ -14,4 +14,10 @@ public class TestDemo {
         User user = userService.login("admin", "1223445");
         System.out.println(user.getUserPassword());
     }
+    @Test
+    public void Test2(){
+        UserService userService = new UserServiceImpl();
+        int i = userService.pwdModify(5, "1234567879");
+        System.out.println(i);
+    }
 }

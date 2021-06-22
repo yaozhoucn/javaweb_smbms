@@ -35,11 +35,20 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public int pwdModify(User user) {
-        Connection connection =null;
+    /**
+     * 主要与业务层交互
+     * @param id
+     * @param userPassword
+     * @return
+     */
+
+    public int pwdModify(int id, String userPassword) {
+        Connection connection = null;
         connection = BaseDao.getConnection();
+        int pwdModify = userDao.pwdModify(connection, id, userPassword);
+        BaseDao.closeResource(connection,null,null);
 
-
-        return 0;
+        return pwdModify;
     }
+
 }

@@ -47,21 +47,36 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
-    public int pwdModify(Connection connection, User user) {
-        int i = 0;
+    /**
+     * 主要与数据库交互
+     * @param connection
+     * @param id
+     * @param userPassword
+     * @return
+     */
+    public int pwdModify(Connection connection, int id,String userPassword) {
+        boolean flag = false;
+        int executeUpdate = 0;
         PreparedStatement presm = null;
-        String userCode = user.getUserCode();
-        String userPassword = user.getUserPassword();
-        Object[] params = {userCode,userPassword};
+        Object[] params = {userPassword,id};
 
-                String sql = "update smbms.smbms_user set userPassword = ? where userName = ?";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            i = preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return i;
+        String sql = "update smbms.smbms_user set userPassword = ? where id = ?";
+
+            if (connection != null){
+                try {
+                     executeUpdate = BaseDao.executeUpdate(connection, sql, presm, params);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (executeUpdate > 0){
+                flag = true;
+            }else {
+                flag = false;
+            }
+            BaseDao.closeResource(null,null,presm);
+
+        return executeUpdate;
     }
 
 }

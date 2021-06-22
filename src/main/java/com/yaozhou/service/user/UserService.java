@@ -15,5 +15,12 @@ public interface UserService {
      * @return
      */
     public User login(String userCode,String userPassword);
-    public int pwdModify(User user);
+
+    /**
+     *
+     * @param id
+     * @param userPassword
+     * @return 修改密码
+     */
+    public int pwdModify(int id,String userPassword);
 }

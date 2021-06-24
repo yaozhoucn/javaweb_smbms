@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <footer class="footer">
-    超市订单管理系统
+    尧舟超市订单管理系统
 </footer>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/time.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.8.3.min.js"></script>

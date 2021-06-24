@@ -43,11 +43,13 @@ public class UserServiceImpl implements UserService {
      */
 
     public int pwdModify(int id, String userPassword) {
+        int pwdModify = 0;
         Connection connection = null;
-        connection = BaseDao.getConnection();
-        int pwdModify = userDao.pwdModify(connection, id, userPassword);
-        BaseDao.closeResource(connection,null,null);
-
+        if (connection != null){
+            connection = BaseDao.getConnection();
+            pwdModify = userDao.pwdModify(connection, id, userPassword);
+            BaseDao.closeResource(connection,null,null);
+        }
         return pwdModify;
     }
 

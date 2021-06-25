@@ -23,7 +23,7 @@ public class SysFilter implements Filter {
         //判断session里面的user是否为空
         User user = (User) req.getSession().getAttribute(Constants.USER_SEESI0N);
         if (user == null){
-            resp.sendRedirect("../error.jsp");
+            resp.sendRedirect("../error.html");
         }else {
             chain.doFilter(request,response);
         }

@@ -3,6 +3,8 @@ package com.yaozhou.servlet.user;
 import com.alibaba.fastjson.JSONArray;
 import com.mysql.jdbc.StringUtils;
 import com.yaozhou.pojo.User;
+import com.yaozhou.service.user.UserService;
+import com.yaozhou.service.user.UserServiceImpl;
 import com.yaozhou.util.Constants;
 
 import javax.servlet.ServletException;
@@ -31,6 +33,8 @@ public class UserServlet extends HttpServlet {
         System.out.println(method);
         if (method!=null && method.equals("pwdmodify")){
             this.pwdmodify(req,resp);
+        }else if (method!=null && method.equals("savepwd")){
+            this.updatePwd(req,resp);
         }
 
 
@@ -61,6 +65,21 @@ public class UserServlet extends HttpServlet {
         outWrite.write(JSONArray.toJSONString(resultMap));
         outWrite.flush();
         outWrite.close();
+    }
+    //修改密码
+    private void updatePwd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = (User) req.getSession().getAttribute(Constants.USER_SEESI0N);
+        Integer id = user.getId();
+        String newpassword = req.getParameter("newpassword");
+        UserService userService = new UserServiceImpl();
+        int pwdModify = userService.pwdModify(id, newpassword);
+        if (pwdModify > 0){
+            req.setAttribute(Constants.SYS_MESSAGE,"密码修改成功!");
+        }else {
+            req.setAttribute(Constants.SYS_MESSAGE,"密码修改失败！");
+        }
+        req.getRequestDispatcher("pwdmodify.jsp").forward(req,resp);
+
     }
 
     @Override

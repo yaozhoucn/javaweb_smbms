@@ -17,7 +17,7 @@ public class TestDemo {
     @Test
     public void Test2(){
         UserService userService = new UserServiceImpl();
-        int i = userService.pwdModify(5, "1234567879");
+        int i = userService.pwdModify(5, "123456");
         System.out.println(i);
     }
 }

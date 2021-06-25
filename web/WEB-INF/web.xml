@@ -4,6 +4,21 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <!--注册servlet-->
+    <!--log4j注册-->
+    <servlet>
+        <servlet-name>log4j-init</servlet-name>
+        <servlet-class>com.yaozhou.servlet.log.Log4jInit</servlet-class>
+        <init-param>
+            <param-name>log4j-init-file</param-name>
+            <param-value>WEB-INF\classes\log4j.properties</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>log4j-init</servlet-name>
+        <url-pattern>/log4j-init</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.yaozhou.servlet.user.LoginServlet</servlet-class>
@@ -20,6 +35,15 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/jsp/logout.do</url-pattern>
+    </servlet-mapping>
+    <!--userservlet-->
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.yaozhou.servlet.user.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/jsp/user.do</url-pattern>
     </servlet-mapping>
     <!--注册过滤器-->
     <!--注册页面编码过滤器-->

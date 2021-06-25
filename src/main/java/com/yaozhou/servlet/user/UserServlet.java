@@ -1,5 +1,6 @@
 package com.yaozhou.servlet.user;
 
+import com.alibaba.fastjson.JSONArray;
 import com.mysql.jdbc.StringUtils;
 import com.yaozhou.pojo.User;
 import com.yaozhou.util.Constants;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,8 +27,20 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String method = req.getParameter("method");
+        System.out.println(method);
+        if (method!=null && method.equals("pwdmodify")){
+            this.pwdmodify(req,resp);
+        }
+
+
+    }
+    //使用ajax判断密码是否正确
+    private void pwdmodify(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String oldpassword = req.getParameter("oldpassword");
+        //从session当中获取当前密码
         User user = (User) req.getSession().getAttribute(Constants.USER_SEESI0N);
+        System.out.println(user.getUserPassword());
         Map<String, String> resultMap = new HashMap<String, String>();
         if (user == null){
             resultMap.put("result","sessionerror");
@@ -34,14 +48,19 @@ public class UserServlet extends HttpServlet {
             resultMap.put("result","error");
         }else {
             if (oldpassword.equals(user.getUserPassword())){
+
                 resultMap.put("result","true");
             }else {
                 resultMap.put("result","false");
             }
-
         }
 
-
+        //把resultMap转换成json对象输出
+        resp.setContentType("application/json");
+        PrintWriter outWrite = resp.getWriter();
+        outWrite.write(JSONArray.toJSONString(resultMap));
+        outWrite.flush();
+        outWrite.close();
     }
 
     @Override

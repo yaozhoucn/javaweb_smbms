@@ -22,5 +22,5 @@ public interface UserService {
      * @param userPassword
      * @return 修改密码
      */
-    public int pwdModify(int id,String userPassword);
+    public boolean pwdModify(int id,String userPassword);
 }

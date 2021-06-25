@@ -35,6 +35,8 @@ public class UserServlet extends HttpServlet {
             this.pwdmodify(req,resp);
         }else if (method!=null && method.equals("savepwd")){
             this.updatePwd(req,resp);
+        }else if (method!=null && method.equals("query") ){
+            this.query(req,resp);
         }
 
 
@@ -68,18 +70,30 @@ public class UserServlet extends HttpServlet {
     }
     //修改密码
     private void updatePwd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        boolean flag = false;
         User user = (User) req.getSession().getAttribute(Constants.USER_SEESI0N);
-        Integer id = user.getId();
         String newpassword = req.getParameter("newpassword");
-        UserService userService = new UserServiceImpl();
-        int pwdModify = userService.pwdModify(id, newpassword);
-        if (pwdModify > 0){
-            req.setAttribute(Constants.SYS_MESSAGE,"密码修改成功!");
+        if (user != null && !StringUtils.isNullOrEmpty(newpassword)){
+            UserService userService = new UserServiceImpl();
+            Integer id = user.getId();
+            flag = userService.pwdModify(id, newpassword);
+            if (flag){
+                req.setAttribute(Constants.SYS_MESSAGE,"密码修改成功,请退出并使用新密码重新登录！");
+                //退出重新登陆
+                //注销session
+               req.getSession().removeAttribute(Constants.USER_SEESI0N);
+            }else {
+                req.setAttribute(Constants.SYS_MESSAGE,"密码修改失败！");
+            }
         }else {
             req.setAttribute(Constants.SYS_MESSAGE,"密码修改失败！");
         }
         req.getRequestDispatcher("pwdmodify.jsp").forward(req,resp);
 
+
+    }
+    private void query(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/jsp/userlist.jsp").forward(req,resp);
     }
 
     @Override

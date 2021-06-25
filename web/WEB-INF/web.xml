@@ -5,6 +5,15 @@
          version="4.0">
     <!--注册servlet-->
     <!--log4j注册-->
+
+    <!--配置错误页面-->
+
+    <!--<error-page>
+        <error-code>404</error-code>
+        <location>/error.html</location>
+    </error-page>-->
+
+
     <servlet>
         <servlet-name>log4j-init</servlet-name>
         <servlet-class>com.yaozhou.servlet.log.Log4jInit</servlet-class>
@@ -69,7 +78,10 @@
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 
-
+    <!--设置session过期时间-->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 
 <!--
     <servlet-mapping>

@@ -54,14 +54,17 @@ public class BaseDao {
     }
 
     //编写查询公共类
-    public static ResultSet executeQuery(Connection connection, String sql,PreparedStatement presm,ResultSet resultSet1,Object...params) throws SQLException {
-        ResultSet resultSet = null;
+    public static ResultSet executeQuery(Connection connection, String sql,PreparedStatement preparedStatement,ResultSet resultSet,Object...params) throws SQLException {
+
 
         //预编译sql
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        for (int i = 0; i <params.length ; i++) {
-            preparedStatement.setObject(i+1,params[i]);
+        preparedStatement = connection.prepareStatement(sql);
+        if (params !=null){
+            for (int i = 0; i < params.length ; i++) {
+                preparedStatement.setObject(i+1,params[i]);
+            }
         }
+
 
         try {
             resultSet = preparedStatement.executeQuery();

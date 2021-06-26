@@ -22,8 +22,8 @@ public class TestDemo {
     @Test
     public void Test2(){
         UserService userService = new UserServiceImpl();
-        boolean i = userService.pwdModify(5, "123456");
-        System.out.println(i);
+        int userCount = userService.getUserCount(null, 3);
+        System.out.println(userCount);
     }
     @Test
     public void Test3() throws SQLException {

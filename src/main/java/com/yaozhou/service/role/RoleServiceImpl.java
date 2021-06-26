@@ -11,8 +11,12 @@ import java.util.List;
 /**
  * Created by WXHang on HANG at 2021/6/25 17:40
  * Desc：
+ * @author HANG
  */
 public class RoleServiceImpl implements RoleService {
+    /**
+     *  私有构造方法赋值
+     */
     private RoleDao roleDao;
     public RoleServiceImpl(){
         roleDao = new RoleDaoImpl();

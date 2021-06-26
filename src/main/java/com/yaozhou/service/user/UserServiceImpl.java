@@ -10,6 +10,7 @@ import java.sql.Connection;
 /**
  * Created by WXHang on HANG at 2021/6/21 17:00
  * Desc：
+ * @author HANG
  */
 public class UserServiceImpl implements UserService {
     /**
@@ -55,6 +56,13 @@ public class UserServiceImpl implements UserService {
             BaseDao.closeResource(connection,null,null);
 
         return pwdModify;
+    }
+
+    public int getUserCount(String userName, int userRole) {
+        Connection connection = BaseDao.getConnection();
+        int count = userDao.getUserCount(connection, userName, userRole);
+        BaseDao.closeResource(connection,null,null);
+        return count;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.yaozhou.dao.user;
 
+import com.mysql.jdbc.StringUtils;
 import com.yaozhou.dao.BaseDao;
 import com.yaozhou.pojo.User;
 
@@ -7,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by WXHang on HANG at 2021/6/21 16:32
@@ -77,6 +80,39 @@ public class UserDaoImpl implements UserDao {
             BaseDao.closeResource(null,null,presm);
 
         return executeUpdate;
+    }
+
+    public int getUserCount(Connection connection, String userName, int userRole) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        StringBuffer sql = new StringBuffer();
+        Object[] params = {};
+        int count = 0;
+        if (connection != null){
+            List<Object> list = new ArrayList<Object>();
+            sql.append("select count(1) as count from smbms_user u ,smbms_role r where u.userRole = r.id ");
+            if (!StringUtils.isNullOrEmpty(userName)){
+                sql.append("and u.userName like ?");
+                list.add("%"+userName+"%");
+            }
+            if (userRole > 0){
+                sql.append(" and r.id = ?");
+                list.add(userRole);
+            }
+            params = list.toArray();
+            System.out.println("sql --->>"+sql);
+            try {
+                resultSet = BaseDao.executeQuery(connection, sql.toString(), preparedStatement, resultSet,params);
+                if (resultSet.next()) {
+                    count = resultSet.getInt("count");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            BaseDao.closeResource(null,resultSet,preparedStatement);
+        }
+
+        return count;
     }
 
 }

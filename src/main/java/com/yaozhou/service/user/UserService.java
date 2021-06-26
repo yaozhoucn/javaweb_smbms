@@ -2,6 +2,8 @@ package com.yaozhou.service.user;
 
 import com.yaozhou.pojo.User;
 
+import java.sql.Connection;
+
 /**
  * Created by WXHang on HANG at 2021/6/21 16:57
  * Desc：
@@ -23,4 +25,12 @@ public interface UserService {
      * @return 修改密码
      */
     public boolean pwdModify(int id,String userPassword);
+
+    /**
+     * 获取用户数量
+     * @param userName
+     * @param userRole
+     * @return
+     */
+    public int getUserCount(String userName, int userRole);
 }

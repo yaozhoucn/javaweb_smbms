@@ -6,6 +6,7 @@ import com.yaozhou.dao.user.UserDaoImpl;
 import com.yaozhou.pojo.User;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -47,15 +48,25 @@ public class UserServiceImpl implements UserService {
     public boolean pwdModify(int id, String userPassword) {
         boolean pwdModify = false;
         Connection connection = null;
-        connection = BaseDao.getConnection();
-
-
-           int i  = userDao.pwdModify(connection, id, userPassword);
-           if (i > 0){
-               pwdModify = true;
-           }
+        try {
+            connection = BaseDao.getConnection();
+            //开启jdbc事务
+            connection.setAutoCommit(false);
+            int i  = userDao.pwdModify(connection, id, userPassword);
+            connection.commit();
+            if (i > 0){
+                pwdModify = true;
+            }else {
+                //出现异常进行回滚
+                connection.rollback();
+                System.out.println("密码修改失败");
+                System.out.println("rollback=============");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
             BaseDao.closeResource(connection,null,null);
-
+        }
         return pwdModify;
     }
 

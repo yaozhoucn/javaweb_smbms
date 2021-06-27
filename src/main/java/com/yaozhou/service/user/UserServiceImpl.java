@@ -6,6 +6,7 @@ import com.yaozhou.dao.user.UserDaoImpl;
 import com.yaozhou.pojo.User;
 
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * Created by WXHang on HANG at 2021/6/21 17:00
@@ -63,6 +64,13 @@ public class UserServiceImpl implements UserService {
         int count = userDao.getUserCount(connection, userName, userRole);
         BaseDao.closeResource(connection,null,null);
         return count;
+    }
+
+    public List<User> getUserList(String userName, int userRole, int currentPageNo, int pageSize) throws Exception {
+        Connection connection = BaseDao.getConnection();
+        List<User> userList = userDao.getUserList(connection, userName, userRole, currentPageNo, pageSize);
+        BaseDao.closeResource(connection,null,null);
+        return userList;
     }
 
 }

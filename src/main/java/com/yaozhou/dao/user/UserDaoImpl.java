@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
     /**
      * 主要与数据库交互
      * @param connection
-     * @param id
+u.bir     * @param id
      * @param userPassword
      * @return
      */
@@ -113,6 +113,54 @@ public class UserDaoImpl implements UserDao {
         }
 
         return count;
+    }
+
+    public List<User> getUserList(Connection connection, String userName, int userRole, int currentPageNo, int pageSize) throws Exception {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Object[] params = {};
+        List<User> userList = new ArrayList<User>();
+        if (connection != null){
+            ArrayList<Object> list = new ArrayList<Object>();
+            StringBuffer sql = new StringBuffer();
+            //sql.append("select u.userCode,u.userName,u.gender,(year(sysdate())-year(u.birthday)) as age,u.phone,u.userRole,r.roleName as userRoleName from smbms_user u ,smbms_role r where u.userRole = r.id");
+            sql.append("select u.userCode,u.userName,u.gender,u.birthday,u.phone,u.userRole,r.roleName as userRoleName from smbms_user u ,smbms_role r where u.userRole = r.id");
+            if (!StringUtils.isNullOrEmpty(userName)){
+                sql.append(" and u.userName like ?");
+                list.add("%"+userName+"%");
+            }
+            if (userRole > 0 ){
+                sql.append(" and r.id = ?");
+                list.add(userRole);
+            }
+            sql.append(" order by u.id DESC limit ?,?");
+            //分页参数
+            currentPageNo = (currentPageNo-1)*pageSize;
+            list.add(currentPageNo);
+            list.add(pageSize);
+
+            params = list.toArray();
+
+            System.out.println("sql ===>>"+sql);
+            try {
+                resultSet = BaseDao.executeQuery(connection,sql.toString(),preparedStatement,resultSet,params);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            while (resultSet.next()){
+                User user = new User();
+                user.setUserCode(resultSet.getString("userCode"));
+                user.setUserName(resultSet.getString("userName"));
+                user.setGender(resultSet.getInt("gender"));
+                user.setBirthday(resultSet.getDate("birthday"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setUserRole(resultSet.getInt("userRole"));
+                user.setUserRoleName(resultSet.getString("userRoleName"));
+                userList.add(user);
+            }
+        }
+        BaseDao.closeResource(null,resultSet,preparedStatement);
+        return userList;
     }
 
 }

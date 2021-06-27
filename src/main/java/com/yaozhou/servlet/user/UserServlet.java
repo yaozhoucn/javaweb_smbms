@@ -2,10 +2,14 @@ package com.yaozhou.servlet.user;
 
 import com.alibaba.fastjson.JSONArray;
 import com.mysql.jdbc.StringUtils;
+import com.yaozhou.pojo.Role;
 import com.yaozhou.pojo.User;
+import com.yaozhou.service.role.RoleService;
+import com.yaozhou.service.role.RoleServiceImpl;
 import com.yaozhou.service.user.UserService;
 import com.yaozhou.service.user.UserServiceImpl;
 import com.yaozhou.util.Constants;
+import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +32,7 @@ public class UserServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
+    @SneakyThrows
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = req.getParameter("method");
@@ -92,8 +98,26 @@ public class UserServlet extends HttpServlet {
 
 
     }
-    private void query(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void query(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        String queryname = req.getParameter("queryname");
+        String temp = req.getParameter("queryUserRole");
+        System.out.println(queryname);
+        int queryUserRole = 0;
+        System.out.println(queryUserRole);
+        UserService userService = new UserServiceImpl();
+        RoleService roleService = new RoleServiceImpl();
+        List<Role> roleList = roleService.getRoleList();
+        System.out.println(roleList);
+        if(temp != null && !temp.equals("")){
+            queryUserRole = Integer.parseInt(temp);//给查询赋值
+        }
+        List<User> userList = userService.getUserList(queryname, queryUserRole, 1, 5);
+        System.out.println("role++++"+queryUserRole);
+        req.setAttribute("userList",userList);
+        req.setAttribute("roleList",roleList);
         req.getRequestDispatcher("/jsp/userlist.jsp").forward(req,resp);
+        //queryUserRole
+        //queryUserName
     }
 
     @Override

@@ -10,7 +10,7 @@
            		<form method="get" action="${pageContext.request.contextPath }/jsp/user.do">
 					<input name="method" value="query" class="input-text" type="hidden">
 					 <span>用户名：</span>
-					 <input name="queryname" class="input-text"	type="text" value="${queryUserName }">
+					 <input name="queryname" class="input-text"	type="text" value="${queryUserName}">
 					 
 					 <span>用户角色：</span>
 					 <select name="queryUserRole">
@@ -22,7 +22,6 @@
 						   </c:forEach>
 						</c:if>
 	        		</select>
-					 
 					 <input type="hidden" name="pageIndex" value="1"/>
 					 <input	value="查 询" type="submit" id="searchbutton">
 					 <a href="${pageContext.request.contextPath}/jsp/useradd.jsp" >添加用户</a>

@@ -20,10 +20,12 @@ public class TestDemo {
         System.out.println(user.getUserPassword());
     }
     @Test
-    public void Test2(){
+    public void Test2() throws Exception {
         UserService userService = new UserServiceImpl();
-        int userCount = userService.getUserCount(null, 3);
-        System.out.println(userCount);
+        List<User> userList = userService.getUserList(null, 0, 1, 8);
+        for (User user : userList) {
+            System.out.println(user.getUserName());
+        }
     }
     @Test
     public void Test3() throws SQLException {

@@ -3,6 +3,7 @@ package com.yaozhou.service.user;
 import com.yaozhou.pojo.User;
 
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * Created by WXHang on HANG at 2021/6/21 16:57
@@ -33,4 +34,6 @@ public interface UserService {
      * @return
      */
     public int getUserCount(String userName, int userRole);
+
+    public List<User> getUserList(String userName, int userRole, int currentPageNo, int pageSize) throws Exception;
 }

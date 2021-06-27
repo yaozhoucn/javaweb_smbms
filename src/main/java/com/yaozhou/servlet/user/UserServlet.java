@@ -131,9 +131,9 @@ public class UserServlet extends HttpServlet {
         int totalCount = userService.getUserCount(queryname, queryUserRole);
         //获取总页数
         PageSupport pageSupport = new PageSupport();
-        pageSupport.setPageSize(pageSize);
-        pageSupport.setCurrentPageNo(currentPageNo);
-        pageSupport.setTotalCount(totalCount);
+        //pageSupport.setPageSize(pageSize);
+        //pageSupport.setCurrentPageNo(currentPageNo);
+        //pageSupport.setTotalCount(totalCount);
         int totalPageCount = pageSupport.getTotalPageCount(totalCount, pageSize);
         //控制首页和尾页
         if(currentPageNo < 1){

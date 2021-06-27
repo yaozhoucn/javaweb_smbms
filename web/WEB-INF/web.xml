@@ -45,6 +45,24 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/jsp/logout.do</url-pattern>
     </servlet-mapping>
+    <!--billServlet订单页面-->
+    <servlet>
+        <servlet-name>billServlet</servlet-name>
+        <servlet-class>com.yaozhou.servlet.bill.billServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>billServlet</servlet-name>
+        <url-pattern>/jsp/bill.do</url-pattern>
+    </servlet-mapping>
+    <!--providerServlet供应商管理-->
+    <servlet>
+        <servlet-name>providerServlet</servlet-name>
+        <servlet-class>com.yaozhou.servlet.provider.providerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>providerServlet</servlet-name>
+        <url-pattern>/jsp/provider.do</url-pattern>
+    </servlet-mapping>
     <!--userservlet-->
     <servlet>
         <servlet-name>UserServlet</servlet-name>

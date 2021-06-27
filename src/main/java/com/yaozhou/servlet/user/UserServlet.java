@@ -9,6 +9,7 @@ import com.yaozhou.service.role.RoleServiceImpl;
 import com.yaozhou.service.user.UserService;
 import com.yaozhou.service.user.UserServiceImpl;
 import com.yaozhou.util.Constants;
+import com.yaozhou.util.PageSupport;
 import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;
@@ -99,8 +100,10 @@ public class UserServlet extends HttpServlet {
 
     }
     private void query(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        //从前端获取数据
         String queryname = req.getParameter("queryname");
         String temp = req.getParameter("queryUserRole");
+        String pageIndex = req.getParameter("pageIndex");
         System.out.println(queryname);
         int queryUserRole = 0;
         System.out.println(queryUserRole);
@@ -108,13 +111,44 @@ public class UserServlet extends HttpServlet {
         RoleService roleService = new RoleServiceImpl();
         List<Role> roleList = roleService.getRoleList();
         System.out.println(roleList);
+        //判断获取的queryname是否为空；
+        if(queryname == null){
+            queryname = "";
+        }
+        //不判空会报空指针异常
         if(temp != null && !temp.equals("")){
             queryUserRole = Integer.parseInt(temp);//给查询赋值
         }
-        List<User> userList = userService.getUserList(queryname, queryUserRole, 1, 5);
+        //第一次进入页面为固定
+        //设置页面容量
+        int pageSize = Constants.pageSize;
+        //设置当前页
+        int currentPageNo = 1;
+        if (pageIndex != null){
+            currentPageNo = Integer.valueOf(pageIndex);
+        }
+        //获取总数以便分页
+        int totalCount = userService.getUserCount(queryname, queryUserRole);
+        //获取总页数
+        PageSupport pageSupport = new PageSupport();
+        pageSupport.setPageSize(pageSize);
+        pageSupport.setCurrentPageNo(currentPageNo);
+        pageSupport.setTotalCount(totalCount);
+        int totalPageCount = pageSupport.getTotalPageCount(totalCount, pageSize);
+        //控制首页和尾页
+        if(currentPageNo < 1){
+            currentPageNo = 1;
+        }else if(currentPageNo > totalPageCount){
+            currentPageNo = totalPageCount;
+        }
+        List<User> userList = userService.getUserList(queryname, queryUserRole, currentPageNo, pageSize);
         System.out.println("role++++"+queryUserRole);
         req.setAttribute("userList",userList);
         req.setAttribute("roleList",roleList);
+        req.setAttribute("totalPageCount", totalPageCount);
+        req.setAttribute("pageSize",pageSize);
+        req.setAttribute("currentPageNo",currentPageNo);
+        req.setAttribute("totalCount",totalCount);
         req.getRequestDispatcher("/jsp/userlist.jsp").forward(req,resp);
         //queryUserRole
         //queryUserName

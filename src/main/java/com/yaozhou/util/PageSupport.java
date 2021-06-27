@@ -44,8 +44,12 @@ public class PageSupport {
 		}
 	}
 
-	public int getTotalPageCount() {
-		return totalPageCount;
+	public int getTotalPageCount(int totalCount,int pageSize) {
+		if (totalCount%pageSize == 0){
+			return totalCount/pageSize;
+		}else {
+			return totalCount/pageSize + 1;
+		}
 	}
 
 	public void setTotalPageCount(int totalPageCount) {
